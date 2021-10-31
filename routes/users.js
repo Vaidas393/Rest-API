@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { User, validateUser } = require("../models/users");
 
-//POST: CREATE A NEW USER
+//POST: CREATE A NEW BOOK
 router.post("/", async (req, res) => {
   const error = await validateUser(req.body);
   if (error.message) res.status(400).send(error.message);
@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     email: req.body.userEmail,
     first_name: req.body.userName,
     last_name: req.body.userLastName,
-    job: req.body.jobTitle,
+    title: req.body.jobTitle,
   });
 
   user
@@ -20,11 +20,11 @@ router.post("/", async (req, res) => {
       res.send(user);
     })
     .catch((error) => {
-      res.status(500).send("User not created");
+      res.status(500).send("User was not stored in db");
     });
 });
 
-//GET ALL USERS
+//GET ALL BOOKS
 router.get("/", (req, res) => {
   User.find()
     .then((users) => res.send(users))
@@ -33,14 +33,14 @@ router.get("/", (req, res) => {
     });
 });
 
-//GET THE USER BY ID
+//GET THE BOOK BY ID
 router.get("/:userId", async (req, res) => {
   const user = await User.findById(req.params.userId);
   if (!user) res.status(404).send("User not found");
   res.send(user);
 });
 
-//UPDATE USER BASED ON ID
+//UPDATE BOOK BASED ON ID
 router.put("/:userId", async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     req.params.userId,
@@ -48,7 +48,7 @@ router.put("/:userId", async (req, res) => {
       email: req.body.userEmail,
       first_name: req.body.userName,
       last_name: req.body.userLastName,
-      job: req.body.jobTitle,
+      title: req.body.jobTitle,
     },
     { new: true }
   );
@@ -57,7 +57,7 @@ router.put("/:userId", async (req, res) => {
   res.send(updatedUser);
 });
 
-//DELETE USER BASED ON ID
+//DELETE BOOK BASED ON ID
 router.delete("/:userId", async (req, res) => {
   const user = await User.findByIdAndRemove(req.params.userId);
   if (!user) res.status(404).send("user with id not found");

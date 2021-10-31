@@ -3,38 +3,38 @@ const yup = require("yup");
 
 //USER SCHEMA
 const UserSchema = new mongoose.Schema({
-email:{
-    type:String,
-    required:true,
-    minlength:3,
-    maxlength:50
-},
-first_name:{
-    type:String,
-    required:true,
-    minlength:3,
-    maxlength:50
-},
-last_name:{
-    type:String,
-    required:true,
-    minlength:3,
-    maxlength:50
-},
-job:{
-    type:String,
-    required:true,
-    minlength:3,
-    maxlength:50
-}
- });
+  email: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 40,
+  },
+  first_name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 20,
+  },
+  last_name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 20,
+  },
+  title: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 20,
+  },
+});
 
 const validateUser = (user) => {
   const schema = yup.object().shape({
-    userEmail: yup.string().required().email("Bad email format").min(3).max(50),
-    userName: yup.string().required().min(3).max(40),
-    userLastName: yup.string().required().min(3).max(40),
-    jobTitle: yup.string().required().min(3).max(40),
+    userEmail: yup.string().required().email("Bad email format").min(3).max(40),
+    userName: yup.string().required().min(3).max(20),
+    userLastName: yup.string().required().min(3).max(20),
+    jobTitle: yup.string().required().min(3).max(20),
   });
 
   return schema

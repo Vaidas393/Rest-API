@@ -3,14 +3,9 @@ const mongoose = require("mongoose");
 const winston = require('winston');
 const app = express();
 require("dotenv").config();
-const userRoute = require('./routes/users');
+const usersRoute = require('./routes/users');
 
 const PORT = process.env.PORT || 3000;
-
-mongoose.connect(
-  process.env.MONGO_URL,
-  {useNewUrlParser:true}
-)
 
 //middlewares
 app.use(express.json());
@@ -34,14 +29,14 @@ const logger = winston.createLogger({
 });
 
 //routes
-app.use('/users', userRoute);
+app.use('/users',usersRoute);
 
 
-//checking connections
+//connect to mongodb atlas
 mongoose
   .connect(process.env.MONGO_URL, { useNewUrlParser: true })
   .then(() => {
-    logger.info("connected to mongoDb");
+    logger.info("connected to mongoDb atlas");
   })
   .catch((error) => {
     logger.error(error.message);
