@@ -43,8 +43,8 @@ Delete user
 4) If fails prints out customized message.
 
 - Delete user test:
-- Deletes previously created user.
-- Checks response status.
-- Checks if requests contains message that user is no longer found.
+1) Deletes previously created user.
+2) Checks response status.
+3) Checks if requests contains message that user is no longer found.
 
 ### Authors: [Vaidas Pocius]( https://github.com/Vaidas393)
